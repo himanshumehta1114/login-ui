@@ -1,14 +1,15 @@
 import { useState } from "react";
 import "./login.css";
-import Input from "../components/input";
-import Button from "../components/button";
+import Input from "../input";
+import Button from "../button";
+import { formatMobile } from "../../helpers";
 
 const Login = () => {
   const [number, setNumber] = useState("");
 
   return (
     <div className="login">
-      {number ? (
+      {false ? (
         <>
           <h1>Enter OTP</h1>
           <span>
@@ -20,7 +21,11 @@ const Login = () => {
           <h1>Log In</h1>
           <span>Use your registered phone number</span>
           <form className="login__form">
-            <Input value={number} onChange={({target}) => setNumber(target.value)} />
+            <Input
+              maxLength={12}
+              value={number}
+              onChange={({ target }) => setNumber(formatMobile(target.value))}
+            />
             <Button />
           </form>
         </>
