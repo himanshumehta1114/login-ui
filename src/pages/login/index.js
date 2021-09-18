@@ -11,13 +11,18 @@ import Timer from "../../components/timer";
 const Login = () => {
   const { generateOtp, validateOtp, otpReferenceId, resetGenOtp, isLoading } =
     useAuth();
-  const [timer, setTimer] = useState(false);
-  const [timerReset, setTimerReset] = useState(false);
 
+  // otp
   const otpLength = 4;
   const initOtpVal = () => Array(otpLength).fill("");
 
   const [otp, setOtp] = useState(initOtpVal);
+
+  // timer
+  const timerDuration = { seconds: 30, minutes: 0 };
+  const [timer, setTimer] = useState(false);
+  const [timerReset, setTimerReset] = useState(false);
+
   const [number, setNumber] = useState("");
   const [error, setError] = useState("");
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -88,7 +93,11 @@ const Login = () => {
             {error && <Error message={error} />}
             <p>
               {timer && !timerReset ? (
-                <Timer seconds={10} setReset={setTimerReset} />
+                <Timer
+                  seconds={timerDuration.seconds}
+                  minutes={timerDuration.minutes}
+                  setReset={setTimerReset}
+                />
               ) : timer && timerReset ? (
                 <Button
                   inline
