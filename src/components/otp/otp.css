@@ -1,0 +1,21 @@
+.otp {
+  display: flex;
+  justify-content: space-between;
+}
+
+.otp__input {
+  border: none;
+  border: 1px solid gray;
+  margin-top: 1.5rem;
+  padding: 0.5rem 0;
+  font-weight: bold;
+  text-align: center;
+  font-size: 1.5rem;
+  border-radius: 3px;
+}
+
+.otp__input:focus {
+  outline: none;
+  border: 1px solid #2979ff;
+}
+

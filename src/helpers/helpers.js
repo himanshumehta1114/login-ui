@@ -25,14 +25,26 @@ const insertSpace = (num, idx) => {
  * @param {string} mobNum - mobile number string
  * @returns returns human readable mobile number string
  */
-export const formatMobile = (mobNum) => {
-  if (mobNum.length > 7) {
-    return insertSpace(mobNum, 8);
+export const formatMobileInput = (mobNum) => {
+  if (mobNum.length > 3) {
+    mobNum = insertSpace(mobNum, 3);
   }
 
-  if (mobNum.length > 3) {
-    return insertSpace(mobNum, 3);
+  if (mobNum.length > 7) {
+    mobNum = insertSpace(mobNum, 8);
   }
 
   return mobNum;
 };
+
+/**
+ * formats mobile number output to plain text without spaces
+ *
+ * @param {string} mobNum - mobile number string
+ * @returns returns plain mobile number string
+ */
+export const formatMobileOutput = (mobNum) =>
+  mobNum
+    .split("")
+    .filter((_) => _ !== " ")
+    .join("");

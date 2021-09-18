@@ -1,10 +1,42 @@
 .button {
-    background: #2979ff;
-    border: none;
-    width: 100%;
-    color: white;
-    font-weight: bold;
-    margin-top: 0.5rem;
-    padding: 0.5rem 0rem;
-    border-radius: 5px;
+  border: none;
+  background: gray;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.button__spinner {
+  animation: spin 1s linear infinite;
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+
+.button__primary {
+  font-weight: bold;
+  background: #2979ff;
+  border-radius: 5px;
+  color: white;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem 0rem;
+}
+
+.button__inline {
+  display: inline;
+  background: none;
+  color: blue;
+  font-size: 1rem;
+}
+
+.button__disabled {
+  background: gray;
 }

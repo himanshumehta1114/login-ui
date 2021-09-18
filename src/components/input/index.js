@@ -1,7 +1,25 @@
-import "./input.css"
+import "./input.css";
 
-const Input = (props) => {
-    return <input {...props} className="input" type="text" />
-}
+const Input = ({ fillWidth, center, textSize, isOtp, ...props }) => {
+  const classes = ["input"];
 
-export default Input
+  if (fillWidth) {
+    classes.push("input__fillWidth");
+  }
+
+  if (center) {
+    classes.push("input__center");
+  }
+
+  if (textSize) {
+    classes.push(`input__${textSize}`);
+  }
+
+  if (isOtp) {
+    classes.push(`input__otp`);
+  }
+
+  return <input {...props} className={classes.join(" ")} type="text" />;
+};
+
+export default Input;
