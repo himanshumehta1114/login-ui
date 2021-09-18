@@ -43,6 +43,12 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 Run `npx serve -s build` to host app on [http://localhost:5000](http://localhost:5000).
 
+## Application Flow
+
+Following chart briefly describes the flow of the data in the app to give you a quick understanding of data flow.
+
+![image](https://user-images.githubusercontent.com/25463496/133898383-55ab7bc7-91be-4984-97b6-c82c5b327138.png)
+
 ## 🐛 Known Issues
 
 #### Mock API
