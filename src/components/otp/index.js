@@ -1,68 +1,81 @@
-import { useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useState } from "react";
+import OtpInput from "./otpInput";
 import "./otp.css";
 
-const OtpInput = ({ focus, autoFocus, ...props }) => {
-  const inputRef = useRef(null);
-
-  useLayoutEffect(() => {
-    if (inputRef.current) {
-      if (focus && autoFocus) {
-        inputRef.current.focus();
-      }
-    }
-  }, [focus, autoFocus, inputRef]);
-
-  return (
-    <input
-      ref={inputRef}
-      maxLength={1}
-      size={1}
-      className="otp__input"
-      {...props}
-    />
-  );
-};
-
+/**
+ * Renders component to accept OTP number of variable length
+ * 
+ * @param {object} props - otp component props
+ * @param {number} length - length of otp
+ * @param {number[]} otp - array of otp values
+ * @param {object} setOtp - function to set otp in parent component
+ * @returns 
+ */
 const Otp = ({ length, otp, setOtp, ...rest }) => {
   const [activeInput, setActiveInput] = useState(0);
 
-  const handleOnChange = (e) => {
-    const {
-      target: { value },
-    } = e;
+  /**
+   * focues field based on active input
+   */
+  const focusInput = useCallback(
+    (idx) => {
+      // input should remain in 0 to otp length range
+      const selectedIdx = Math.max(Math.min(length - 1, idx), 0);
+      setActiveInput(selectedIdx);
+    },
+    [length, setActiveInput]
+  );
 
-    if (!value) {
-      return;
-    }
-
-    let newOtpVal = [...otp];
-    newOtpVal[activeInput] = value;
-
-    setOtp(newOtpVal);
-    focusNext();
-  };
-
-  const focusInput = (idx) => {
-    // input should remain in 0 to otp length range
-    const selectedIdx = Math.max(Math.min(length - 1, idx), 0);
-    setActiveInput(selectedIdx);
-  };
-
-  const focusNext = () => {
+  /**
+   * focuesses next input field
+   */
+  const focusNext = useCallback(() => {
     focusInput(activeInput + 1);
-  };
+  }, [focusInput, activeInput]);
 
-  const focusPrev = () => {
+  /**
+   * focusses previous input field
+   */
+  const focusPrev = useCallback(() => {
     focusInput(activeInput - 1);
-  };
+  }, [focusInput, activeInput]);
 
-  const removeCode = () => {
+  /**
+   * sets otp value to otp prop on changing the otp input
+   */
+  const handleOnChange = useCallback(
+    (e) => {
+      if (!e.target.value) {
+        return;
+      }
+
+      let newOtpVal = [...otp];
+      newOtpVal[activeInput] = e.target.value;
+
+      setOtp(newOtpVal);
+      focusNext();
+    },
+    [activeInput, otp, setOtp, focusNext]
+  );
+
+  /**
+   * removes otp from input
+   */
+  const removeCode = useCallback(() => {
     let newOtpVal = [...otp];
     newOtpVal[activeInput] = "";
 
     setOtp(newOtpVal);
-  };
+  }, [setOtp, otp, activeInput]);
 
+  console.log({otp})
+
+  /**
+   * handles focus and inputs of different key down actions, 
+   * 
+   * @param {object} e - event object
+   * @returns 
+   */
   const onKeyDown = (e) => {
     const { key } = e;
     if (key === "Backspace" || key === "Delete") {

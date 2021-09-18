@@ -1,6 +1,11 @@
+import {memo} from "react"
 import logo from "../../images/logo.png";
 import "./header.css"
 
+/**
+ * Renders the Header component with Brand logo
+ * @returns 
+ */
 const Header = () => {
   return (
     <header className="header">
@@ -14,4 +19,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default memo(Header);

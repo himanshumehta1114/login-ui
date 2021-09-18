@@ -11,23 +11,6 @@
   width: 100%;
 }
 
-.input__center {
-  text-align: center;
-}
-
-.input__l {
-  font-size: 1.5rem;
-}
-
-.input__otp {
-  border: 1px solid gray;
-  border-radius: 3px;
-}
-
-.input__otp:focus {
-  border: 1px solid #2979ff;
-}
-
 .input:focus {
   outline: none;
   border-bottom: 1px solid #2979ff;

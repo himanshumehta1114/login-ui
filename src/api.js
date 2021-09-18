@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 const BASE_URL = process.env.REACT_APP_API_URL;
 
 const mockResps = {
@@ -16,6 +17,7 @@ const mockResps = {
 };
 
 const client = async (endpoint, data) => {
+// eslint-disable-next-line
   const config = {
     method: "POST",
     redirect: "follow",

@@ -1,5 +1,9 @@
+import { memo } from "react";
 import "./button.css";
 
+/**
+ * Spinner component to illustrate loading state in Button component
+ */
 const Spinner = (props) => (
   <svg
     {...props}
@@ -16,6 +20,34 @@ const Spinner = (props) => (
   </svg>
 );
 
+export function FullPageSpinner() {
+  return (
+    <div
+      css={{
+        fontSize: '4em',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <Spinner />
+    </div>
+  )
+}
+
+/**
+ * renders button component with the following proptypes
+ *
+ * @param {object} props
+ * @param {boolean} props.primary - renders primary button
+ * @param {boolean} props.inline - renders inline button
+ * @param {boolean} props.disabled - disables button clicks and renders disabled button styles
+ * @param {boolean} props.loading - renders Spinner and disabled the Button
+ * @param {object} props.rest - passes the remaining props to the render element
+ * @returns
+ */
 const Button = ({ primary, inline, disabled, loading, children, ...rest }) => {
   const classes = ["button"];
 
@@ -42,4 +74,4 @@ const Button = ({ primary, inline, disabled, loading, children, ...rest }) => {
   );
 };
 
-export default Button;
+export default memo(Button);
